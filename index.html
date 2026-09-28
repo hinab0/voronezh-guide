@@ -1,0 +1,880 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+
+  <meta name="theme-color" content="#f4f7fb">
+
+  <title>Воронеж без барьеров — путеводитель</title>
+
+  <style>
+    /* 1. Основные настройки */
+
+    :root {
+      color-scheme: light;
+
+      --background: #f4f7fb;
+      --surface: #ffffff;
+      --primary: #245780;
+      --primary-dark: #183e60;
+      --text: #23364a;
+      --muted: #65778a;
+      --border: #dce5ee;
+      --accent: #e8f1f8;
+
+      --radius: 16px;
+      --shadow: 0 8px 28px rgba(28, 62, 91, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family: system-ui, -apple-system,
+                   BlinkMacSystemFont, "Segoe UI",
+                   Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    a:focus-visible {
+      outline: 3px solid #5599d1;
+      outline-offset: 3px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    /* 2. Шапка */
+
+    .header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.4;
+    }
+
+    .logo strong {
+      color: var(--primary-dark);
+      font-size: 19px;
+    }
+
+    .logo span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .navigation {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .navigation a {
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+
+    .navigation a:hover {
+      color: var(--primary);
+    }
+
+    /* 3. Главный экран */
+
+    .hero {
+      padding: 85px 0 70px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 16px auto;
+      color: var(--primary-dark);
+      font-size: clamp(32px, 5vw, 52px);
+      line-height: 1.18;
+      letter-spacing: -0.035em;
+    }
+
+    .hero-description {
+      max-width: 580px;
+      margin: 0 auto 32px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .search {
+      max-width: 640px;
+      margin: 0 auto;
+      display: flex;
+      gap: 10px;
+      padding: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .search input {
+      flex: 1;
+      min-width: 0;
+      padding: 12px;
+      border: 0;
+      outline: none;
+      background: transparent;
+      color: var(--text);
+    }
+
+    .primary-button {
+      padding: 12px 24px;
+      border: 0;
+      border-radius: 10px;
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+      transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .primary-button:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    /* 4. Фильтры */
+
+    .filters {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .filter {
+      padding: 10px 17px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background: var(--surface);
+      color: var(--muted);
+      transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .filter:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .filter[aria-pressed="true"] {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+
+    /* 5. Карточки */
+
+    .places {
+      padding-bottom: 90px;
+    }
+
+    .section-heading {
+      margin-bottom: 26px;
+    }
+
+    .section-heading h2 {
+      margin: 0 0 5px;
+      color: var(--primary-dark);
+      font-size: 28px;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .card-placeholder {
+      min-height: 170px;
+      display: grid;
+      place-items: center;
+      background: var(--accent);
+      color: #7895ae;
+    }
+
+    .card-placeholder svg {
+      width: 56px;
+      height: 56px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .card-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 23px;
+    }
+
+    .card-type {
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .card h3 {
+      margin: 9px 0;
+      color: var(--primary-dark);
+      font-size: 21px;
+      line-height: 1.3;
+    }
+
+    .card p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .status {
+      display: inline-block;
+      align-self: flex-start;
+      margin-top: auto;
+      padding: 6px 11px;
+      border-radius: 8px;
+      background: #f0f3f6;
+      color: #65778a;
+      font-size: 12px;
+    }
+
+    .card-button {
+      align-self: flex-start;
+      margin-top: 22px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .card-button:hover {
+      text-decoration: underline;
+    }
+
+    .empty {
+      grid-column: 1 / -1;
+      padding: 45px 20px;
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      text-align: center;
+      color: var(--muted);
+    }
+
+    /* 6. Подвал */
+
+    .footer {
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    /* 7. Демонстрационное уведомление */
+
+    .notice {
+      position: fixed;
+      z-index: 10;
+      left: 50%;
+      bottom: 25px;
+      width: max-content;
+      max-width: calc(100% - 32px);
+      padding: 14px 22px;
+      border-radius: 12px;
+      background: var(--primary-dark);
+      color: white;
+      box-shadow: var(--shadow);
+      text-align: center;
+      transform: translate(-50%, 20px);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        opacity 0.25s ease,
+        transform 0.25s ease,
+        visibility 0.25s ease;
+    }
+
+    .notice.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, 0);
+    }
+
+    /* 8. Адаптивность */
+
+    @media (max-width: 850px) {
+      .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero {
+        padding: 65px 0 55px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: calc(100% - 32px);
+      }
+
+      .header-inner {
+        flex-direction: column;
+        justify-content: center;
+        gap: 14px;
+        padding: 18px 0;
+      }
+
+      .logo {
+        align-items: center;
+        text-align: center;
+      }
+
+      .navigation {
+        justify-content: center;
+        gap: 20px;
+        font-size: 14px;
+      }
+
+      .hero {
+        padding: 48px 0;
+      }
+
+      .hero-description {
+        font-size: 15px;
+      }
+
+      .search {
+        flex-direction: column;
+      }
+
+      .search input {
+        width: 100%;
+      }
+
+      .primary-button {
+        width: 100%;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .card-placeholder {
+        min-height: 145px;
+      }
+
+      .places {
+        padding-bottom: 55px;
+      }
+    }
+
+    /* Учитываем пользователей,
+       предпочитающих меньше анимации */
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ШАПКА -->
+
+  <header class="header">
+    <div class="container header-inner">
+
+      <a class="logo" href="#home">
+        <strong>Воронеж без барьеров</strong>
+        <span>Город, открытый каждому</span>
+      </a>
+
+      <nav class="navigation" aria-label="Основная навигация">
+        <a href="#home">Главная</a>
+        <a href="#places">Места</a>
+        <a href="#footer">О проекте</a>
+      </nav>
+
+    </div>
+  </header>
+
+
+  <main id="home">
+
+    <!-- ГЛАВНЫЙ ЭКРАН -->
+
+    <section class="hero">
+      <div class="container">
+
+        <div class="eyebrow">
+          Путеводитель по Воронежу
+        </div>
+
+        <h1>
+          Откройте Воронеж
+          без лишних препятствий
+        </h1>
+
+        <p class="hero-description">
+          Находите интересные места и заранее
+          узнавайте об их доступности.
+          Планируйте прогулки с уверенностью.
+        </p>
+
+        <form class="search" id="search-form"
+              role="search">
+
+          <input
+            id="search-input"
+            type="search"
+            placeholder="Название места..."
+            aria-label="Поиск места"
+            autocomplete="off"
+          >
+
+          <button class="primary-button" type="submit">
+            Найти место
+          </button>
+
+        </form>
+
+        <!-- Пока фильтры только демонстрационные -->
+
+        <div class="filters" aria-label="Фильтры доступности">
+
+          <button class="filter"
+                  type="button"
+                  data-filter="all"
+                  aria-pressed="true">
+            Все места
+          </button>
+
+          <button class="filter"
+                  type="button"
+                  data-filter="steps"
+                  aria-pressed="false">
+            Без ступеней
+          </button>
+
+          <button class="filter"
+                  type="button"
+                  data-filter="ramp"
+                  aria-pressed="false">
+            Пандус
+          </button>
+
+          <button class="filter"
+                  type="button"
+                  data-filter="toilet"
+                  aria-pressed="false">
+            Доступный туалет
+          </button>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- КАТАЛОГ -->
+
+    <section class="places container" id="places">
+
+      <div class="section-heading">
+        <h2>Исследуйте город</h2>
+        <p>
+          Первые места нашего путеводителя
+        </p>
+      </div>
+
+      <div class="cards" id="cards">
+
+        <!-- Карточка 1 -->
+
+        <article class="card"
+                 data-name="Адмиралтейская площадь">
+
+          <div class="card-placeholder" aria-hidden="true">
+            <svg viewBox="0 0 64 64">
+              <path d="M8 26 L32 10 L56 26"/>
+              <path d="M12 28 H52"/>
+              <path d="M17 32 V49 M27 32 V49
+                       M37 32 V49 M47 32 V49"/>
+              <path d="M10 53 H54 M7 58 H57"/>
+            </svg>
+          </div>
+
+          <div class="card-content">
+
+            <span class="card-type">
+              Городская площадь
+            </span>
+
+            <h3>Адмиралтейская площадь</h3>
+
+            <p>
+              Историческая площадь Воронежа
+              рядом с Петровской набережной.
+            </p>
+
+            <span class="status">
+              Доступность уточняется
+            </span>
+
+            <button class="card-button"
+                    type="button"
+                    data-place="Адмиралтейская площадь">
+              Подробнее →
+            </button>
+
+          </div>
+        </article>
+
+
+        <!-- Карточка 2 -->
+
+        <article class="card"
+                 data-name="Петровская набережная">
+
+          <div class="card-placeholder" aria-hidden="true">
+            <svg viewBox="0 0 64 64">
+              <path d="M4 26 Q12 20 20 26
+                       T36 26 T52 26 T68 26"/>
+              <path d="M4 37 Q12 31 20 37
+                       T36 37 T52 37 T68 37"/>
+              <path d="M4 48 Q12 42 20 48
+                       T36 48 T52 48 T68 48"/>
+            </svg>
+          </div>
+
+          <div class="card-content">
+
+            <span class="card-type">
+              Общественное пространство
+            </span>
+
+            <h3>Петровская набережная</h3>
+
+            <p>
+              Пространство для прогулок
+              вдоль Воронежского водохранилища.
+            </p>
+
+            <span class="status">
+              Доступность уточняется
+            </span>
+
+            <button class="card-button"
+                    type="button"
+                    data-place="Петровская набережная">
+              Подробнее →
+            </button>
+
+          </div>
+        </article>
+
+
+        <!-- Карточка 3 -->
+
+        <article class="card"
+                 data-name="Гото Предестинация">
+
+          <div class="card-placeholder" aria-hidden="true">
+            <svg viewBox="0 0 64 64">
+              <path d="M32 6 V42"/>
+              <path d="M29 12 L10 38 H29 Z"/>
+              <path d="M35 15 L51 38 H35 Z"/>
+              <path d="M8 43 H56 L47 53 H18 Z"/>
+              <path d="M8 58 Q16 53 24 58
+                       T40 58 T56 58"/>
+            </svg>
+          </div>
+
+          <div class="card-content">
+
+            <span class="card-type">
+              Корабль-музей
+            </span>
+
+            <h3>«Гото Предестинация»</h3>
+
+            <p>
+              Исторический корабль-музей.
+              Для знакомства с объектом
+              также существует виртуальный тур.
+            </p>
+
+            <span class="status">
+              Доступность уточняется
+            </span>
+
+            <button class="card-button"
+                    type="button"
+                    data-place="Гото Предестинация">
+              Подробнее →
+            </button>
+
+          </div>
+        </article>
+
+      </div>
+
+      <p id="search-result"
+         role="status"
+         aria-live="polite"></p>
+
+    </section>
+
+  </main>
+
+
+  <!-- ПОДВАЛ -->
+
+  <footer class="footer" id="footer">
+    <div class="container">
+      «Воронеж без барьеров» —
+      учебный прототип веб-путеводителя.
+      Сведения о доступности пока не проверены.
+    </div>
+  </footer>
+
+
+  <!-- УВЕДОМЛЕНИЕ -->
+
+  <div class="notice"
+       id="notice"
+       role="status"
+       aria-live="polite">
+  </div>
+
+
+  <script>
+    // 1. Получаем элементы страницы
+
+    const searchForm =
+      document.querySelector("#search-form");
+
+    const searchInput =
+      document.querySelector("#search-input");
+
+    const cards =
+      document.querySelectorAll(".card");
+
+    const filters =
+      document.querySelectorAll(".filter");
+
+    const result =
+      document.querySelector("#search-result");
+
+    const notice =
+      document.querySelector("#notice");
+
+    let noticeTimeout;
+
+
+    // 2. Показываем временное уведомление
+
+    function showNotice(message) {
+      clearTimeout(noticeTimeout);
+
+      notice.textContent = message;
+      notice.classList.add("visible");
+
+      noticeTimeout = setTimeout(() => {
+        notice.classList.remove("visible");
+      }, 3000);
+    }
+
+
+    // 3. Поиск по названию места
+
+    function searchPlaces() {
+      const query =
+        searchInput.value.trim().toLowerCase();
+
+      let found = 0;
+
+      cards.forEach(card => {
+        const name =
+          card.dataset.name.toLowerCase();
+
+        const matches = name.includes(query);
+
+        card.hidden = !matches;
+
+        if (matches) {
+          found++;
+        }
+      });
+
+      result.textContent = found === 0
+        ? "По вашему запросу ничего не найдено."
+        : "";
+    }
+
+    searchForm.addEventListener("submit", event => {
+      event.preventDefault();
+
+      // Возвращаем обычный каталог
+      // перед поиском по названию.
+
+      filters.forEach(filter => {
+        filter.setAttribute(
+          "aria-pressed",
+          String(filter.dataset.filter === "all")
+        );
+      });
+
+      searchPlaces();
+
+      document.querySelector("#places")
+        .scrollIntoView({ behavior: "smooth" });
+    });
+
+    searchInput.addEventListener("input", searchPlaces);
+
+
+    // 4. Демонстрационные фильтры
+
+    filters.forEach(filter => {
+      filter.addEventListener("click", () => {
+
+        filters.forEach(item => {
+          item.setAttribute("aria-pressed", "false");
+        });
+
+        filter.setAttribute("aria-pressed", "true");
+
+        if (filter.dataset.filter === "all") {
+          searchPlaces();
+          return;
+        }
+
+        // Пока нет проверенных данных,
+        // поэтому не выдаём объекты за доступные.
+
+        showNotice(
+          "Фильтр появится после добавления " +
+          "проверенных данных о доступности."
+        );
+
+      });
+    });
+
+
+    // 5. Кнопки карточек
+
+    document.querySelectorAll(".card-button")
+      .forEach(button => {
+
+        button.addEventListener("click", () => {
+          showNotice(
+            "Карточка «" +
+            button.dataset.place +
+            "» появится в следующей версии."
+          );
+        });
+
+      });
+  </script>
+
+</body>
+</html>
