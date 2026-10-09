@@ -1,0 +1,341 @@
+:root {
+      color-scheme: light;
+
+      --background:#eef3f8;;
+      --surface: #ffffff;
+      --primary: #245780;
+      --primary-dark: #183e60;
+      --text: #23364a;
+      --muted: #65778a;
+      --border: #dce5ee;
+      --accent: #e8f1f8;
+
+      --radius: 16px;
+      --shadow: 0 8px 28px rgba(28, 62, 91, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family: system-ui, -apple-system,
+                   BlinkMacSystemFont, "Segoe UI",
+                   Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    a:focus-visible {
+      outline: 3px solid #5599d1;
+      outline-offset: 3px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+   /* 2. Шапка */
+
+    .header { 
+      background: var(--surface);
+      border-bottom: 3px solid var(--border);
+    }
+
+    .header-inner {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.4;
+    }
+
+    .logo strong {
+      color: var(--primary-dark);
+      font-size: 19px;
+    }
+
+    .logo span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .navigation {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .navigation a {
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+
+    .navigation a:hover {
+      color: var(--primary);
+    }
+
+    /* 3. Главный экран */
+
+    .hero {
+      padding: 85px 0 70px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 16px auto;
+      color: var(--primary-dark);
+      font-size: clamp(32px, 5vw, 52px);
+      line-height: 1.18;
+      letter-spacing: -0.035em;
+    }
+
+    .hero-description {
+      max-width: 580px;
+      margin: 0 auto 32px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .search {
+      max-width: 640px;
+      margin: 0 auto;
+      display: flex;
+      gap: 10px;
+      padding: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .search input {
+      flex: 1;
+      min-width: 0;
+      padding: 12px;
+      border: 0;
+      outline: none;
+      background: transparent;
+      color: var(--text);
+    }
+
+    .primary-button {
+      padding: 12px 24px;
+      border: 0;
+      border-radius: 10px;
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+      transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .primary-button:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    /* 4. Фильтры */
+
+    .filters {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .filter {
+      padding: 10px 17px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background: var(--surface);
+      color: var(--muted);
+      transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .filter:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .filter[aria-pressed="true"] {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+
+    /* 5. Карточки */
+
+    .places {
+      padding-bottom: 90px;
+    }
+
+    .section-heading {
+      margin-bottom: 26px;
+    }
+
+    .section-heading h2 {
+      margin: 0 0 5px;
+      color: var(--primary-dark);
+      font-size: 28px;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .card-placeholder {
+      min-height: 170px;
+      display: grid;
+      place-items: center;
+      background: var(--accent);
+      color: #7895ae;
+    }
+
+    .card-placeholder svg {
+      width: 56px;
+      height: 56px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .card-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 23px;
+    }
+
+    .card-type {
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .card h3 {
+      margin: 9px 0;
+      color: var(--primary-dark);
+      font-size: 21px;
+      line-height: 1.3;
+    }
+
+    .card p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .status {
+      display: inline-block;
+      align-self: flex-start;
+      margin-top: auto;
+      padding: 6px 11px;
+      border-radius: 8px;
+      background: #f0f3f6;
+      color: #65778a;
+      font-size: 12px;
+    }
+
+    .card-button {
+      align-self: flex-start;
+      margin-top: 22px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .card-button:hover {
+      text-decoration: underline;
+    }
+
+    .empty {
+      grid-column: 1 / -1;
+      padding: 45px 20px;
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      text-align: center;
+      color: var(--muted);
+    }
+        .footer {
+      padding: 32px 0;
+      border-top: 3px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
