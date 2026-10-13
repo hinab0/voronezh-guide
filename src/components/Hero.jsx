@@ -1,4 +1,15 @@
-function Hero() {
+function Hero({ query, setQuery, activeFilter, setActiveFilter, setNoticeMessage }) {
+const onClickFilter = (filter) => {
+  setActiveFilter(filter);
+
+  if (filter === "all") {
+    return;
+  }
+
+  setNoticeMessage(
+    "Фильтр появится после добавления проверенных данных о доступности."
+  );
+};
 return ( <section className="hero">
       <div className="container">
         <div className="eyebrow">
@@ -21,6 +32,8 @@ return ( <section className="hero">
             placeholder="Название места..."
             aria-label="Поиск места"
             autoComplete="off"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
           />
           <button className="primary-button" type="submit">
             Найти место
@@ -30,25 +43,28 @@ return ( <section className="hero">
           <button className="filter"
                   type="button"
                   data-filter="all"
-                  aria-pressed="true">
+                  onClick={() => onClickFilter("all")}>
             Все места
           </button>
           <button className="filter"
                   type="button"
                   data-filter="steps"
-                  aria-pressed="false">
+                  onClick={() => onClickFilter("steps")}
+                  aria-pressed={activeFilter === "steps"}>
             Без ступеней
           </button>
           <button className="filter"
                   type="button"
                   data-filter="ramp"
-                  aria-pressed="false">
+                  onClick={() => onClickFilter("ramp")}
+                  aria-pressed={activeFilter === "ramp"}>
             Пандус
           </button>
           <button className="filter"
                   type="button"
                   data-filter="toilet"
-                  aria-pressed="false">
+                  onClick={() => onClickFilter("toilet")}
+                  aria-pressed={activeFilter === "toilet"}>
             Доступный туалет
           </button>
 

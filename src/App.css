@@ -339,3 +339,36 @@
       font-size: 13px;
       text-align: center;
     }
+
+.notice {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translate(-50%, 20px);
+  z-index: 1000;
+
+  max-width: calc(100% - 32px);
+  padding: 14px 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 8px 28px rgba(28, 62, 91, 0.16);
+
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    visibility 0.25s ease;
+}
+
+.notice.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}

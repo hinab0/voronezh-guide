@@ -1,4 +1,4 @@
-function PlaceCard({ name, type, description, icon }) {
+function PlaceCard({ name, type, description, icon, setNoticeMessage }) {
   return (
     <article className="card" data-name={name}>
 
@@ -20,7 +20,7 @@ function PlaceCard({ name, type, description, icon }) {
           Доступность уточняется
         </span>
 
-        <button className="card-button" type="button">
+        <button className="card-button" type="button" onClick={() => setNoticeMessage(`Карточка ${name} появится в следующем обновлении.`)}>
           Подробнее →
         </button>
 

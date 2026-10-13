@@ -1,7 +1,11 @@
-function Notice() {
+function Notice({ message }) {
   return (
-    <div className="notice">
-      Фильтр появится после добавления проверенных данных о доступности.
+    <div
+      className={`notice ${message ? "visible" : ""}`}
+      role="status"
+      aria-live="polite"
+    >
+      {message}
     </div>
   );
 }
