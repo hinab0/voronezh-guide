@@ -1,20 +1,21 @@
+import { Link } from "react-router";
+
 function Header() {
   return (
-    <>
-      <header className="header">
-        <div className="container header-inner">
-          <a className="logo" href="#home">
-            <strong>Воронеж без барьеров</strong>
-            <span>Город, открытый каждому</span>
-          </a>
-                <nav className="navigation" aria-label="Основная навигация">
-        <a href="#home">Главная</a>
-        <a href="#places">Места</a>
-        <a href="#footer">О проекте</a>
-      </nav>
-        </div>  
-      </header>
-    </>
+    <header className="header">
+      <div className="container header-inner">
+        <Link className="logo" to="/" aria-label="На главную">
+          <strong>Воронеж без барьеров</strong>
+          <span>Город, открытый каждому</span>
+        </Link>
+
+        <nav className="navigation" aria-label="Основная навигация">
+          <Link to="/">Главная</Link>
+          <Link to="/places">Все места</Link>
+          <Link to="/#footer">О проекте</Link>
+        </nav>
+      </div>
+    </header>
   );
 }
 
