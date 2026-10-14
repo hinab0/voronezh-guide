@@ -4,33 +4,8 @@ import Header from "./Header";
 import Hero from "./Hero";
 import { useState, useEffect } from "react";
 import PlaceCard from "./PlaceCard.jsx";
-import SquareIcon from "../icons/SquareIcon.jsx";
-import EmbankmentIcon from "../icons/EmbankmentIcon.jsx";
-import ShipIcon from "../icons/ShipIcon.jsx";
 import Notice from "./Notice";
-const places = [
-  {
-    name: "Адмиралтейская площадь",
-    type: "Городская площадь",
-    description:
-      "Историческая площадь Воронежа рядом с Петровской набережной.",
-    icon: <SquareIcon />,
-  },
-  {
-    name: "Петровская набережная",
-    type: "Общественное пространство",
-    description:
-      "Пространство для прогулок вдоль Воронежского водохранилища.",
-    icon: <EmbankmentIcon />,
-  },
-  {
-    name: "Гото Предестинация",
-    type: "Корабль-музей",
-    description:
-      "Исторический корабль-музей. Для знакомства с объектом также существует виртуальный тур.",
-    icon: <ShipIcon />,
-  },
-];
+import { places } from "../place.js";
 function HomePage() {
   const [query, setQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
@@ -82,7 +57,9 @@ function HomePage() {
               type={place.type}
               description={place.description}
               icon={place.icon}
-            setNoticeMessage={setNoticeMessage}
+              detailsPath={place.detailsPath}
+              buttonLabel={place.buttonLabel}
+              setNoticeMessage={setNoticeMessage}
             />
           ))}
         </div>

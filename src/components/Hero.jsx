@@ -43,6 +43,7 @@ return ( <section className="hero">
           <button className="filter"
                   type="button"
                   data-filter="all"
+                  aria-pressed={activeFilter === "all"}
                   onClick={() => onClickFilter("all")}>
             Все места
           </button>
