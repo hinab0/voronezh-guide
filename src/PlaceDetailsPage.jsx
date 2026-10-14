@@ -7,7 +7,7 @@ function PlaceDetailsPage() {
   return <h1>Место не найдено</h1>;
 }
   return (
-    <div>
+    <div className="container detail-page">
       <h1>{place.name}</h1>
       <h3>{place.type}</h3>
       <p>{place.description}</p>

@@ -20,16 +20,28 @@
 
     html {
       scroll-behavior: smooth;
+      background-color: var(--background);
     }
 
     body {
       margin: 0;
+      min-height: 100vh;
       background: var(--background);
       color: var(--text);
       font-family: system-ui, -apple-system,
                    BlinkMacSystemFont, "Segoe UI",
                    Arial, sans-serif;
       line-height: 1.6;
+    }
+
+    #root {
+      background-color: var(--background);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      #root {
+        border-inline-color: transparent;
+      }
     }
 
     button,
@@ -68,12 +80,15 @@
     .header-inner {
       min-height: 82px;
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       gap: 24px;
+      padding-block: 12px;
     }
 
     .logo {
+      min-width: 0;
       display: flex;
       flex-direction: column;
       line-height: 1.4;
@@ -82,6 +97,7 @@
     .logo strong {
       color: var(--primary-dark);
       font-size: 19px;
+      overflow-wrap: anywhere;
     }
 
     .logo span {
@@ -92,10 +108,14 @@
     .navigation {
       display: flex;
       flex-wrap: wrap;
+      min-width: 0;
       gap: 24px;
     }
 
     .navigation a {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
       color: var(--muted);
       transition: color 0.2s ease;
     }
@@ -107,7 +127,7 @@
     /* 3. Главный экран */
 
     .hero {
-      padding: 85px 0 70px;
+      padding: clamp(40px, 7vw, 85px) 0 clamp(40px, 6vw, 70px);
       text-align: center;
     }
 
@@ -136,6 +156,7 @@
     }
 
     .search {
+      width: 100%;
       max-width: 640px;
       margin: 0 auto;
       display: flex;
@@ -150,6 +171,7 @@
     .search input {
       flex: 1;
       min-width: 0;
+      width: 0;
       padding: 12px;
       border: 0;
       outline: none;
@@ -157,7 +179,13 @@
       color: var(--text);
     }
 
+    .search input:focus-visible {
+      outline: 3px solid #5599d1;
+      outline-offset: 2px;
+    }
+
     .primary-button {
+      min-height: 44px;
       padding: 12px 24px;
       border: 0;
       border-radius: 10px;
@@ -185,6 +213,7 @@
     }
 
     .filter {
+      min-height: 44px;
       padding: 10px 17px;
       border: 1px solid var(--border);
       border-radius: 30px;
@@ -230,7 +259,7 @@
 
     .cards {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
       gap: 22px;
     }
 
@@ -272,6 +301,7 @@
 
     .card-content {
       flex: 1;
+      min-width: 0;
       display: flex;
       flex-direction: column;
       padding: 23px;
@@ -286,6 +316,7 @@
     }
 
     .card h3 {
+      overflow-wrap: anywhere;
       margin: 9px 0;
       color: var(--primary-dark);
       font-size: 21px;
@@ -293,12 +324,15 @@
     }
 
     .card p {
+      overflow-wrap: anywhere;
       margin: 0 0 18px;
       color: var(--muted);
       font-size: 14px;
     }
 
     .status {
+      max-width: 100%;
+      overflow-wrap: anywhere;
       display: inline-block;
       align-self: flex-start;
       margin-top: auto;
@@ -310,13 +344,16 @@
     }
 
     .card-button {
+      min-height: 44px;
+      max-width: 100%;
       align-self: flex-start;
       margin-top: 22px;
-      padding: 0;
+      padding: 8px 0;
       border: 0;
       background: transparent;
       color: var(--primary);
       font-weight: 700;
+      overflow-wrap: anywhere;
     }
 
     .card-button:hover {
@@ -374,6 +411,7 @@
 }
 .back-link {
   display: inline-flex;
+  max-width: 100%;
   align-items: center;
   margin-top: 24px;
   padding: 10px 16px;
@@ -383,7 +421,41 @@
   border-radius: var(--radius);
   text-decoration: none;
   font-weight: 500;
+  overflow-wrap: anywhere;
   transition: background 0.2s ease, color 0.2s ease;
+}
+
+@media (max-width: 640px) {
+  .header-inner {
+    align-items: flex-start;
+    gap: 10px 20px;
+  }
+
+  .logo,
+  .navigation {
+    flex: 1 1 100%;
+  }
+
+  .navigation {
+    gap: 4px 16px;
+  }
+
+  .search {
+    flex-wrap: wrap;
+  }
+
+  .search input {
+    flex-basis: 100%;
+    width: 100%;
+  }
+
+  .primary-button {
+    width: 100%;
+  }
+
+  .section-heading h2 {
+    overflow-wrap: anywhere;
+  }
 }
 
 .back-link:hover {
@@ -395,4 +467,11 @@
   color: white;
   background: var(--primary);
   border-color: var(--primary);
+}
+
+.places-page,
+.detail-page {
+  min-width: 0;
+  padding-block: 24px 48px;
+  overflow-wrap: anywhere;
 }

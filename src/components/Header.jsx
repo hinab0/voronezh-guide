@@ -12,7 +12,7 @@ function Header() {
         <nav className="navigation" aria-label="Основная навигация">
           <Link to="/">Главная</Link>
           <Link to="/places">Все места</Link>
-          <Link to="/#footer">О проекте</Link>
+          <Link reloadDocument to="/#footer">О проекте</Link>
         </nav>
       </div>
     </header>

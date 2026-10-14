@@ -24,8 +24,12 @@ return ( <section className="hero">
           узнавайте об их доступности.
           Планируйте прогулки с уверенностью.
         </p>
-        <form className="search" id="search-form"
-              role="search">
+        <form
+          className="search"
+          id="search-form"
+          role="search"
+          onSubmit={(event) => event.preventDefault()}
+        >
           <input
             id="search-input"
             type="search"
