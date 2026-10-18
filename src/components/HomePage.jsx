@@ -1,6 +1,4 @@
 import "../App.css";
-import Footer from "./Footer";
-import Header from "./Header";
 import Hero from "./Hero";
 import { useState, useEffect } from "react";
 import PlaceCard from "./PlaceCard.jsx";
@@ -24,14 +22,13 @@ function HomePage() {
 
     const timeoutId = setTimeout(() => {
       setNoticeMessage("");
-    }, 4000);
+    }, 3000);
 
     return () => clearTimeout(timeoutId);
   }, [noticeMessage]);
 
   return (
     <main id="home">
-      <Header />
 <Hero
   query={query}
   setQuery={setQuery}
@@ -42,7 +39,7 @@ function HomePage() {
 <section className="places container" id="places">
         <div className="section-heading">
           <h2>Исследуйте город</h2>
-          <p>Первые места нашего путевodителя</p>
+          <p>Первые места нашего путевoдителя</p>
         </div>
         <div className="cards">
         {filteredPlaces.length === 0 && (
@@ -57,6 +54,8 @@ function HomePage() {
               type={place.type}
               description={place.description}
               icon={place.icon}
+              image={place.image}
+              imageAlt={place.imageAlt}
               detailsPath={place.detailsPath}
               buttonLabel={place.buttonLabel}
               setNoticeMessage={setNoticeMessage}
@@ -64,7 +63,6 @@ function HomePage() {
           ))}
         </div>
       </section>
-      <Footer />
       <Notice message={noticeMessage} />
     </main>
   );

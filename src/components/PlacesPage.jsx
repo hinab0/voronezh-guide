@@ -1,12 +1,28 @@
-import Header from "./Header.jsx";
+import PlaceCard from "./PlaceCard.jsx";
+import { places } from "../place.js";
 
 function PlacesPage() {
   return (
     <main>
-      <Header />
       <div className="container places-page">
-      <h1>Все места Воронежа</h1>
-      <p>Здесь будет список доступных для изучения мест.</p>
+        <div className="section-heading">
+          <h1>Все места Воронежа</h1>
+        </div>
+        <div className="cards">
+          {places.map((place) => (
+            <PlaceCard
+              key={place.id}
+              name={place.name}
+              type={place.type}
+              description={place.description}
+              icon={place.icon}
+              image={place.image}
+              imageAlt={place.imageAlt}
+              detailsPath={place.detailsPath}
+              buttonLabel={place.buttonLabel}
+            />
+          ))}
+        </div>
       </div>
     </main>
   );

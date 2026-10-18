@@ -5,12 +5,34 @@ export const places = [
   {
     id: "admiralteyskaya",
     name: "Адмиралтейская площадь",
-    type: "Городская площадь",
+    type: "Исторические места",
     description:
-      "Историческая площадь Воронежа рядом с Петровской набережной.",
+      "Адмиралтейская площадь — историческое место Воронежа, связанное с зарождением российского военного флота.",
     icon: SquareIcon,
     detailsPath: "/places/admiralteyskaya",
     buttonLabel: "Об объекте →",
+    image: "/images/admiralteyskaya.jpg",
+    imageAlt: "Успенский Адмиралтейский храм и цветники на Адмиралтейской площади",
+    imageCredit: "Марина Шевченко",
+    imageSource: {
+      name: "Туристско-информационный портал Воронежа",
+      url: "https://visit-voronezh.ru/guide/chto-posetit/tours/ticz-g-voronezha/admiraltejskaya-ploshhad-istoriya-i-sovremennost.html",
+    },
+    highlights: [
+      "Ростральная колонна",
+      "Триумфальные арки",
+      "Успенский Адмиралтейский храм",
+      "Памятники Митрофану Воронежскому и Петру Первому",
+      "Корабль-музей «Гото Предестинация» — внешний осмотр",
+    ],
+    address: "Адмиралтейская площадь, Воронеж",
+    excursion: "Площадь включена в пешеходный экскурсионный маршрут.",
+    accessibilityNote:
+      "Подробные параметры доступности места не проверены. Перед посещением рекомендуется уточнить условия на месте или у организатора экскурсии.",
+    source: {
+      name: "Туристско-информационный центр Воронежа",
+      url: "https://visit-voronezh.ru/guide/chto-posetit/tours/ticz-g-voronezha/admiraltejskaya-ploshhad-istoriya-i-sovremennost.html",
+    },
   },
   {
     id: "petrovskaya-naberezhnaya",
