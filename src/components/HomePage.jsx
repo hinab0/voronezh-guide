@@ -8,14 +8,14 @@ function HomePage() {
   const [query, setQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
   const [noticeMessage, setNoticeMessage] = useState("");
+  const categories = [...new Set(places.map((place) => place.type).filter(Boolean))];
 
-  let filteredPlaces = places.filter((place) =>
-    place.name.toLowerCase().includes(query.trim().toLowerCase())
-  );
-
-  if (activeFilter !== "all") {
-    filteredPlaces = filteredPlaces.filter((place) => place.type === activeFilter);
-  }
+  const normalizedQuery = query.trim().toLowerCase();
+  const filteredPlaces = places.filter((place) => {
+    const matchesQuery = place.name.toLowerCase().includes(normalizedQuery);
+    const matchesCategory = activeFilter === "all" || place.type === activeFilter;
+    return matchesQuery && matchesCategory;
+  });
 
   useEffect(() => {
     if (!noticeMessage) return;
@@ -34,7 +34,7 @@ function HomePage() {
   setQuery={setQuery}
   activeFilter={activeFilter}
   setActiveFilter={setActiveFilter}
-  setNoticeMessage={setNoticeMessage}
+  categories={categories}
 />
 <section className="places container" id="places">
         <div className="section-heading">
@@ -44,7 +44,7 @@ function HomePage() {
         <div className="cards">
         {filteredPlaces.length === 0 && (
   <p className="search-result">
-    По вашему запросу ничего не найдено.
+    По выбранным условиям ничего не найдено.
   </p>
 )}
           {filteredPlaces.map((place) => (

@@ -3,6 +3,35 @@ import Alert from "@mui/material/Alert";
 import Typography from "@mui/material/Typography";
 import { places } from "./place.js";
 
+const ACCESSIBILITY_ITEMS = [
+  { key: "entrance", label: "Вход", statuses: { accessible: "Доступен", inaccessible: "Недоступен", partial: "Частично", unknown: "Не проверено" } },
+  { key: "steps", label: "Ступени", statuses: { present: "Есть", absent: "Нет", partial: "Частично", unknown: "Не проверено" } },
+  { key: "ramp", label: "Пандус", statuses: { present: "Есть", absent: "Нет", partial: "Частично", unknown: "Не проверено" } },
+  { key: "toilet", label: "Туалет", statuses: { available: "Доступен", unavailable: "Недоступен", partial: "Частично", unknown: "Не проверено" } },
+  { key: "route", label: "Маршрут", statuses: { accessible: "Доступен", inaccessible: "Недоступен", partial: "Частично", unknown: "Не проверено" } },
+  { key: "surface", label: "Покрытие", statuses: { even: "Ровное", uneven: "Неровное", mixed: "Смешанное", unknown: "Не проверено" } },
+];
+
+function getCheckedDate(value) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value || "")) return null;
+
+  const date = new Date(`${value}T00:00:00`);
+  if (Number.isNaN(date.getTime()) || date.toISOString().slice(0, 10) !== value) return null;
+
+  return date.toLocaleDateString("ru-RU");
+}
+
+function getHttpUrl(value) {
+  if (typeof value !== "string") return null;
+
+  try {
+    const url = new URL(value);
+    return url.protocol === "http:" || url.protocol === "https:" ? url.href : null;
+  } catch {
+    return null;
+  }
+}
+
 function PlaceDetailsPage() {
   const { id } = useParams();
   const place = places.find((place) => place.id === id);
@@ -10,8 +39,14 @@ function PlaceDetailsPage() {
   return <h1>Место не найдено</h1>;
 }
 
-  const hasSourceInfo =
-    place.source?.name || place.source?.url || place.source?.contact;
+  const sources = Array.isArray(place.sources)
+    ? place.sources
+    : place.source
+      ? [place.source]
+      : [];
+  const hasSourceInfo = sources.some(
+    (source) => source.name || source.url || source.contact
+  );
 
   return (
     <main className="container detail-page">
@@ -22,23 +57,6 @@ function PlaceDetailsPage() {
             src={place.image}
             alt={place.imageAlt || place.name}
           />
-          {(place.imageCredit || place.imageSource?.name || place.imageSource?.url) && (
-            <figcaption className="detail-photo-caption">
-              {place.imageCredit && <span>Фото: {place.imageCredit}</span>}
-              {(place.imageSource?.name || place.imageSource?.url) && (
-                <span>
-                  Источник: {" "}
-                  {place.imageSource.url ? (
-                    <a href={place.imageSource.url}>
-                      {place.imageSource.name || place.imageSource.url}
-                    </a>
-                  ) : (
-                    place.imageSource.name
-                  )}
-                </span>
-              )}
-            </figcaption>
-          )}
         </figure>
       ) : (
         <div
@@ -95,6 +113,17 @@ function PlaceDetailsPage() {
           )}
         </section>
 
+        {place.visitorInfo && (
+          <section className="detail-section" aria-labelledby="visitor-info">
+            <h2 className="detail-section-title" id="visitor-info">
+              Полезная информация
+            </h2>
+            <Typography component="p" variant="inherit" sx={{ margin: 0 }}>
+              {place.visitorInfo}
+            </Typography>
+          </section>
+        )}
+
         <section className="detail-section" aria-labelledby="before-visit">
           <h2 className="detail-section-title" id="before-visit">
             Перед посещением
@@ -113,6 +142,39 @@ function PlaceDetailsPage() {
             {place.accessibilityNote ||
               "Условия посещения и доступность необходимо уточнить перед поездкой."}
           </Alert>
+        </section>
+
+        <section className="detail-section" aria-labelledby="accessibility-title">
+          <h2 className="detail-section-title" id="accessibility-title">
+            Доступность места
+          </h2>
+          <dl className="accessibility-list">
+            {ACCESSIBILITY_ITEMS.map(({ key, label, statuses }) => {
+              const item = place.accessibility?.[key];
+              const status = statuses[item?.status] || "Не проверено";
+              const source = item?.source;
+              const sourceUrl = getHttpUrl(
+                typeof source === "string" ? source : source?.url
+              );
+              const checkedDate = getCheckedDate(item?.checkedAt);
+
+              return (
+                <div className="accessibility-item" key={key}>
+                  <dt>{label}</dt>
+                  <dd>
+                    <span>{status}</span>
+                    {item?.note && <p>{item.note}</p>}
+                    {sourceUrl && (
+                      <p>
+                        Источник: <a href={sourceUrl}>{source?.name || sourceUrl}</a>
+                      </p>
+                    )}
+                    {checkedDate && <p>Проверено: {checkedDate}</p>}
+                  </dd>
+                </div>
+              );
+            })}
+          </dl>
         </section>
 
         {place.address && (
@@ -137,27 +199,35 @@ function PlaceDetailsPage() {
           </section>
         )}
 
+        {place.virtualTour?.url && (
+          <section className="detail-section" aria-labelledby="virtual-tour">
+            <h2 className="detail-section-title" id="virtual-tour">
+              Виртуальный тур
+            </h2>
+            <div className="detail-source">
+              <a href={place.virtualTour.url}>
+                {place.virtualTour.name || place.virtualTour.url}
+              </a>
+            </div>
+          </section>
+        )}
+
         {hasSourceInfo && (
           <section className="detail-section" aria-labelledby="place-source">
             <h2 className="detail-section-title" id="place-source">
-              Источник информации
+              {sources.length > 1 ? "Источники информации" : "Источник информации"}
             </h2>
             <div className="detail-source">
-              {place.source.name && place.source.url ? (
-                <p>
-                  <a href={place.source.url}>{place.source.name}</a>
-                </p>
-              ) : (
-                <>
-                  {place.source.name && <p>{place.source.name}</p>}
-                  {place.source.url && (
-                    <p>
-                      <a href={place.source.url}>{place.source.url}</a>
-                    </p>
+              {sources.map((source) => (
+                <p key={source.url || source.name}>
+                  {source.url ? (
+                    <a href={source.url}>{source.name || source.url}</a>
+                  ) : (
+                    source.name
                   )}
-                </>
-              )}
-              {place.source.contact && <p>{place.source.contact}</p>}
+                  {source.contact && <> — {source.contact}</>}
+                </p>
+              ))}
             </div>
           </section>
         )}

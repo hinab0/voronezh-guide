@@ -1,13 +1,23 @@
 import { Link } from "react-router";
+import { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 
-function PlaceCard({ name, type, description, icon: Icon, image, imageAlt, detailsPath, buttonLabel = "Подробнее →", setNoticeMessage }) {
+function PlaceCard({ name, type, description, icon: Icon, image, imageAlt, detailsPath, buttonLabel = "Подробнее об объекте", setNoticeMessage }) {
+  const [imageFailed, setImageFailed] = useState(false);
+  const showImage = Boolean(image) && !imageFailed;
+
   return (
     <Card
-      component="article"
-      className="card"
+      component={detailsPath ? Link : "article"}
+      {...(detailsPath
+        ? {
+            to: detailsPath,
+            "aria-label": `${name} — ${buttonLabel}`,
+          }
+        : {})}
+      className={`card${detailsPath ? " card-link" : ""}`}
       data-name={name}
       elevation={0}
       sx={{
@@ -16,9 +26,15 @@ function PlaceCard({ name, type, description, icon: Icon, image, imageAlt, detai
         borderRadius: "var(--radius)",
       }}
     >
-      <div className="card-placeholder" aria-hidden={!image}>
-        {image ? (
-          <img className="card-image" src={image} alt={imageAlt || name} loading="lazy" />
+      <div className="card-placeholder" aria-hidden={!showImage}>
+        {showImage ? (
+          <img
+            className="card-image"
+            src={image}
+            alt={detailsPath ? "" : imageAlt || name}
+            loading="lazy"
+            onError={() => setImageFailed(true)}
+          />
         ) : (
           Icon && <Icon />
         )}
@@ -40,37 +56,37 @@ function PlaceCard({ name, type, description, icon: Icon, image, imageAlt, detai
         <p>{description}</p>
         <span className="status">Доступность уточняется</span>
 
-        <Button
-          className="card-button"
-          variant="text"
-          {...(detailsPath
-            ? { component: Link, to: detailsPath }
-            : {
-                type: "button",
-                onClick: () => setNoticeMessage(`Уведомим, когда появится страница «${name}».`),
-              })}
-          sx={{
-            minWidth: 0,
-            minHeight: 44,
-            alignSelf: "flex-start",
-            marginTop: "22px",
-            padding: "8px 0",
-            color: "var(--primary)",
-            fontFamily: "inherit",
-            fontSize: "inherit",
-            fontWeight: 700,
-            lineHeight: "inherit",
-            letterSpacing: "inherit",
-            textTransform: "none",
-            overflowWrap: "anywhere",
-            "&:hover": {
-              backgroundColor: "transparent",
-              textDecoration: "underline",
-            },
-          }}
-        >
-          {buttonLabel}
-        </Button>
+        {detailsPath ? (
+          <span className="card-button">{buttonLabel}</span>
+        ) : (
+          <Button
+            className="card-button"
+            variant="text"
+            type="button"
+            onClick={() => setNoticeMessage(`Уведомим, когда появится страница «${name}».`)}
+            sx={{
+              minWidth: 0,
+              minHeight: 44,
+              alignSelf: "flex-start",
+              marginTop: "22px",
+              padding: "8px 0",
+              color: "var(--primary)",
+              fontFamily: "inherit",
+              fontSize: "inherit",
+              fontWeight: 700,
+              lineHeight: "inherit",
+              letterSpacing: "inherit",
+              textTransform: "none",
+              overflowWrap: "anywhere",
+              "&:hover": {
+                backgroundColor: "transparent",
+                textDecoration: "underline",
+              },
+            }}
+          >
+            {buttonLabel}
+          </Button>
+        )}
       </CardContent>
     </Card>
   );

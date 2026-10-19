@@ -2,18 +2,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-function Hero({ query, setQuery, activeFilter, setActiveFilter, setNoticeMessage }) {
-const onClickFilter = (filter) => {
-  setActiveFilter(filter);
-
-  if (filter === "all") {
-    return;
-  }
-
-  setNoticeMessage(
-    "Фильтр появится после добавления проверенных данных о доступности."
-  );
-};
+function Hero({ query, setQuery, activeFilter, setActiveFilter, categories }) {
 return ( <section className="hero">
       <div className="container">
         <div className="eyebrow">
@@ -52,10 +41,10 @@ return ( <section className="hero">
   className="filters"
   value={activeFilter}
   exclusive
-  aria-label="Фильтры доступности"
+  aria-label="Фильтры по категориям"
   onChange={(event, newFilter) => {
     if (newFilter !== null) {
-      onClickFilter(newFilter);
+      setActiveFilter(newFilter);
     }
   }}
   sx={{
@@ -80,15 +69,11 @@ return ( <section className="hero">
   <ToggleButton value="all">
     Все места
   </ToggleButton>
-  <ToggleButton value="steps">
-    Без ступеней
-  </ToggleButton>
-  <ToggleButton value="ramp">
-    Пандус
-  </ToggleButton>
-  <ToggleButton value="toilet">
-    Доступный туалет
-  </ToggleButton>
+  {categories.map((category) => (
+    <ToggleButton key={category} value={category}>
+      {category}
+    </ToggleButton>
+  ))}
 </ToggleButtonGroup>
       </div>
     </section>  
