@@ -1,6 +1,9 @@
 import SquareIcon from "./icons/SquareIcon.jsx";
 import EmbankmentIcon from "./icons/EmbankmentIcon.jsx";
 import ShipIcon from "./icons/ShipIcon.jsx";
+
+const getImagePath = (filename) => `${import.meta.env.BASE_URL}images/${filename}`;
+
 export const places = [
   {
     id: "admiralteyskaya",
@@ -11,7 +14,7 @@ export const places = [
     icon: SquareIcon,
     detailsPath: "/places/admiralteyskaya",
     buttonLabel: "Подробнее об объекте",
-    image: "/images/admiralteyskaya.jpg",
+    image: getImagePath("admiralteyskaya.jpg"),
     imageAlt: "Успенский Адмиралтейский храм и цветники на Адмиралтейской площади",
     imageCredit: "Марина Шевченко",
     imageSource: {
@@ -51,7 +54,7 @@ export const places = [
     icon: EmbankmentIcon,
     detailsPath: "/places/petrovskaya-naberezhnaya",
     buttonLabel: "Подробнее об объекте",
-    image: "/images/petrovskaya-naberezhnaya.jpg",
+    image: getImagePath("petrovskaya-naberezhnaya.jpg"),
     imageAlt: "Прогулочная набережная у Воронежского водохранилища с причалом и мостом",
     address: "Петровская набережная, Воронеж. Точный адрес входа не подтверждён.",
     visitorInfo:
@@ -82,7 +85,7 @@ export const places = [
     icon: ShipIcon,
     buttonLabel: "Подробнее об объекте",
     detailsPath: "/places/goto-predestinatsiya",
-    image: "/images/goto-predestinatsiya.jpg",
+    image: getImagePath("goto-predestinatsiya.jpg"),
     imageAlt: "Корабль-музей «Гото Предестинация» у причала на берегу водохранилища",
     address: "Петровская набережная, 21А, Воронеж.",
     excursion:
@@ -121,7 +124,7 @@ export const places = [
     icon: EmbankmentIcon,
     detailsPath: "/places/voronezhskoe-vodohranilishche",
     buttonLabel: "Подробнее об объекте",
-    image: "/images/voronezhskoe-vodohranilishche.jpg",
+    image: getImagePath("voronezhskoe-vodohranilishche.jpg"),
     imageAlt: "Вид на Воронежское водохранилище с высоты, с берегами и городской застройкой",
     imageSource: {
       name: "2ВРН — Воронежское водохранилище",
@@ -165,7 +168,7 @@ export const places = [
     icon: EmbankmentIcon,
     detailsPath: "/places/voronezhskiy-zapovednik",
     buttonLabel: "Подробнее об объекте",
-    image: "/images/voronezhskiy-zapovednik.jpg",
+    image: getImagePath("voronezhskiy-zapovednik.jpg"),
     imageAlt: "Здание на территории Воронежского заповедника и скульптуры бобров перед ним",
     imageSource: {
       name: "Заповедники Воронежской области — Must-see.top",
@@ -221,7 +224,7 @@ export const places = [
     icon: SquareIcon,
     detailsPath: "/places/kramskoy-museum",
     buttonLabel: "Подробнее об объекте",
-    image: "/images/kramskoy-museum.jpg",
+    image: getImagePath("kramskoy-museum.jpg"),
     imageAlt: "Фасад Воронежского областного художественного музея имени И. Н. Крамского на проспекте Революции",
     imageSource: {
       name: "Достопримечательности Воронежа — OneTwoTrip",
