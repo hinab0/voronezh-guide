@@ -32,7 +32,7 @@ function PlacesPage() {
   };
 
   return (
-    <main>
+    <main id="main-content" tabIndex={-1}>
       <div className="container places-page">
         <div className="section-heading">
           <h1>Все места Воронежа</h1>
@@ -84,9 +84,27 @@ function PlacesPage() {
             },
           }}
         >
-          <ToggleButton value="all">Все места</ToggleButton>
+          <ToggleButton value="all">
+            {activeCategory === "all" && (
+              <span
+                aria-hidden="true"
+                style={{ marginRight: 9, fontSize: "1.1em", lineHeight: 1 }}
+              >
+                ✓
+              </span>
+            )}
+            Все места
+          </ToggleButton>
           {categories.map((category) => (
             <ToggleButton key={category} value={category}>
+              {activeCategory === category && (
+                <span
+                  aria-hidden="true"
+                  style={{ marginRight: 9, fontSize: "1.1em", lineHeight: 1 }}
+                >
+                  ✓
+                </span>
+              )}
               {category}
             </ToggleButton>
           ))}
@@ -122,10 +140,44 @@ function PlacesPage() {
             },
           }}
         >
-          <ToggleButton value="all">Без фильтра доступности</ToggleButton>
-          <ToggleButton value="ramp">Есть пандус</ToggleButton>
-          <ToggleButton value="steps">Без ступеней</ToggleButton>
+          <ToggleButton value="all">
+            {activeAccessibility === "all" && (
+              <span
+                aria-hidden="true"
+                style={{ marginRight: 9, fontSize: "1.1em", lineHeight: 1 }}
+              >
+                ✓
+              </span>
+            )}
+            Без фильтра доступности
+          </ToggleButton>
+          <ToggleButton value="ramp">
+            {activeAccessibility === "ramp" && (
+              <span
+                aria-hidden="true"
+                style={{ marginRight: 9, fontSize: "1.1em", lineHeight: 1 }}
+              >
+                ✓
+              </span>
+            )}
+            Есть пандус
+          </ToggleButton>
+          <ToggleButton value="steps">
+            {activeAccessibility === "steps" && (
+              <span
+                aria-hidden="true"
+                style={{ marginRight: 9, fontSize: "1.1em", lineHeight: 1 }}
+              >
+                ✓
+              </span>
+            )}
+            Без ступеней
+          </ToggleButton>
         </ToggleButtonGroup>
+
+        <div className="section-heading">
+          <h2>Список мест Воронежа</h2>
+        </div>
 
         <div className="cards">
           {filteredPlaces.length > 0 ? (

@@ -28,7 +28,7 @@ function HomePage() {
   }, [noticeMessage]);
 
   return (
-    <main id="home">
+    <main id="main-content" tabIndex={-1}>
 <Hero
   query={query}
   setQuery={setQuery}

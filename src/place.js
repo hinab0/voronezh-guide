@@ -112,4 +112,178 @@ export const places = [
       },
     ],
   },
+  {
+    id: "voronezhskoe-vodohranilishche",
+    name: "Воронежское водохранилище",
+    type: "Набережные и водоёмы",
+    description:
+      "Городской водоём, сформировавшийся в начале 1970-х годов и ставший частью ландшафта Воронежа с набережными, парками и общественными пространствами по берегам.",
+    icon: EmbankmentIcon,
+    detailsPath: "/places/voronezhskoe-vodohranilishche",
+    buttonLabel: "Подробнее об объекте",
+    image: "/images/voronezhskoe-vodohranilishche.jpg",
+    imageAlt: "Вид на Воронежское водохранилище с высоты, с берегами и городской застройкой",
+    imageSource: {
+      name: "2ВРН — Воронежское водохранилище",
+      url: "https://2vrn.ru/voronezhskoe-vodohranilishe.html",
+    },
+    address:
+      "Воронежское водохранилище, Воронеж. Конкретная точка посещения зависит от выбранного участка берега.",
+    highlights: ["Панорамные виды с набережных и мостов"],
+    visitorInfo:
+      "Водоём можно наблюдать с разных набережных и мостов. Условия подхода следует уточнять для выбранной точки посещения.",
+    accessibility: {
+      entrance: { status: "unknown" },
+      steps: { status: "unknown" },
+      ramp: { status: "unknown" },
+      toilet: { status: "unknown" },
+      route: {
+        status: "unknown",
+        note: "Характеристики маршрута зависят от выбранного участка берега и не подтверждены для водохранилища в целом.",
+      },
+      surface: { status: "unknown" },
+    },
+    accessibilityNote:
+      "Доступность не описывается для водохранилища как единой точки: условия зависят от выбранного берега, набережной или маршрута и требуют отдельного уточнения.",
+    sources: [
+      {
+        name: "Воронежское водохранилище — Tripster",
+        url: "https://experience.tripster.ru/sights/74420-voronezhskoe-vodohranilishe/",
+      },
+      {
+        name: "Воронежское водохранилище — 2ВРН",
+        url: "https://2vrn.ru/voronezhskoe-vodohranilishe.html",
+      },
+    ],
+  },
+  {
+    id: "voronezhskiy-zapovednik",
+    name: "Воронежский государственный природный биосферный заповедник имени В. М. Пескова",
+    type: "Природные территории и заповедники",
+    description:
+      "Охраняемая природная территория в Усманском бору с Центральной усадьбой, музеями и экологическими тропами.",
+    icon: EmbankmentIcon,
+    detailsPath: "/places/voronezhskiy-zapovednik",
+    buttonLabel: "Подробнее об объекте",
+    image: "/images/voronezhskiy-zapovednik.jpg",
+    imageAlt: "Здание на территории Воронежского заповедника и скульптуры бобров перед ним",
+    imageSource: {
+      name: "Заповедники Воронежской области — Must-see.top",
+      url: "https://must-see.top/zapovedniki-voronezhskoy-oblasti/",
+    },
+    address: "394080, г. Воронеж, Госзаповедник, Центральная усадьба.",
+    highlights: [
+      "Экотропа «Заповедная сказка»",
+      "Экотропа «Черепахинская»",
+      "Музей природы",
+      "Музей В. М. Пескова",
+    ],
+    visitorInfo:
+      "Для посещения открыта только разрешённая территория: Центральная усадьба и экскурсионные объекты, включая экотропы. Перед поездкой уточните действующие правила и состояние выбранного маршрута.",
+    accessibility: {
+      entrance: { status: "unknown" },
+      steps: { status: "unknown" },
+      ramp: { status: "unknown" },
+      toilet: { status: "unknown" },
+      route: {
+        status: "unknown",
+        note: "Доступность территории в целом и отдельных экотроп не подтверждена; условия маршрутов следует проверять отдельно.",
+      },
+      surface: { status: "unknown" },
+    },
+    accessibilityNote:
+      "Характеристики доступности всей территории не подтверждены. Условия отдельных объектов и экотроп могут различаться.",
+    sources: [
+      {
+        name: "Официальный сайт Воронежского заповедника",
+        url: "https://zapovednik-vrn.ru/",
+      },
+      {
+        name: "Экотропы — Воронежский заповедник",
+        url: "https://zapovednik-vrn.ru/ekoturizm/predlagaem-posetit/ekotropy/",
+      },
+      {
+        name: "Как добраться — Воронежский заповедник",
+        url: "https://zapovednik-vrn.ru/contacts/addresses/",
+      },
+      {
+        name: "Предлагаем посетить — Воронежский заповедник",
+        url: "https://zapovednik-vrn.ru/ekoturizm/predlagaem-posetit/",
+      },
+    ],
+  },
+  {
+    id: "kramskoy-museum",
+    name: "Воронежский областной художественный музей имени И. Н. Крамского",
+    type: "Музеи и исторические места",
+    description:
+      "Художественный музей с коллекциями искусства Древнего Египта и античности, русского и западноевропейского искусства, фарфора и декоративно-прикладного искусства.",
+    icon: SquareIcon,
+    detailsPath: "/places/kramskoy-museum",
+    buttonLabel: "Подробнее об объекте",
+    image: "/images/kramskoy-museum.jpg",
+    imageAlt: "Фасад Воронежского областного художественного музея имени И. Н. Крамского на проспекте Революции",
+    imageSource: {
+      name: "Достопримечательности Воронежа — OneTwoTrip",
+      url: "https://www.onetwotrip.com/ru/blog/guides/russian-federation/going-for-a-weekend-in-voronezh/",
+    },
+    address: "394036, Воронеж, проспект Революции, 18.",
+    highlights: [
+      "Коллекция искусства Древнего Египта и античности",
+      "Русское искусство XVI–XXI веков",
+      "Западноевропейское искусство XVI–XIX веков",
+      "Коллекции фарфора и декоративно-прикладного искусства",
+    ],
+    visitorInfo:
+      "На официальном сайте музея описана программа «Доступная среда», включая пандус у входа и подъёмную платформу в выставочном зале. Уточните заранее, какие маршруты и залы доступны во время визита.",
+    accessibility: {
+      entrance: {
+        status: "unknown",
+        note: "Наличие пандуса у входа подтверждено, но этого недостаточно, чтобы подтвердить доступность всего входного маршрута.",
+      },
+      steps: { status: "unknown" },
+      ramp: {
+        status: "present",
+        note: "Официальная программа музея сообщает о стационарном пандусе у входа.",
+        source: {
+          name: "Программа «Доступная среда» — музей Крамского",
+          url: "https://mkram.ru/ru/muzej/realizatsiya-gosudarstvennoj-programmy-dostupnaya-sreda/",
+        },
+      },
+      toilet: {
+        status: "unknown",
+        note: "В программе упомянута реконструкция санитарного узла, но конкретные характеристики доступного туалета не описаны.",
+        source: {
+          name: "Программа «Доступная среда» — музей Крамского",
+          url: "https://mkram.ru/ru/muzej/realizatsiya-gosudarstvennoj-programmy-dostupnaya-sreda/",
+        },
+      },
+      route: { status: "unknown" },
+      surface: { status: "unknown" },
+    },
+    accessibilityNote:
+      "Официальная программа музея описывает отдельные меры доступности, но не подтверждает безбарьерность всех помещений и маршрутов. Уточните условия посещения заранее.",
+    sources: [
+      {
+        name: "Официальный сайт музея Крамского",
+        url: "https://mkram.ru/ru/",
+      },
+      {
+        name: "О музее — музей Крамского",
+        url: "https://mkram.ru/ru/muzej/o-nas/",
+      },
+      {
+        name: "Постоянная экспозиция музея",
+        url: "https://mkram.ru/ru/2024/01/19/postoyannaya-ekspozitsiya-muzeya/",
+      },
+      {
+        name: "Контакты и адрес — музей Крамского",
+        url: "https://mkram.ru/ru/muzej/rekvizit/",
+      },
+      {
+        name: "Программа «Доступная среда» — музей Крамского",
+        url: "https://mkram.ru/ru/muzej/realizatsiya-gosudarstvennoj-programmy-dostupnaya-sreda/",
+      },
+    ],
+  },
 ];

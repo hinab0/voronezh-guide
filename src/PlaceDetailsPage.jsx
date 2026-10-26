@@ -36,8 +36,12 @@ function PlaceDetailsPage() {
   const { id } = useParams();
   const place = places.find((place) => place.id === id);
   if (!place) {
-  return <h1>Место не найдено</h1>;
-}
+    return (
+      <main id="main-content" tabIndex={-1}>
+        <h1>Место не найдено</h1>
+      </main>
+    );
+  }
 
   const sources = Array.isArray(place.sources)
     ? place.sources
@@ -47,9 +51,10 @@ function PlaceDetailsPage() {
   const hasSourceInfo = sources.some(
     (source) => source.name || source.url || source.contact
   );
+  const imageSourceUrl = getHttpUrl(place.imageSource?.url);
 
   return (
-    <main className="container detail-page">
+    <main id="main-content" tabIndex={-1} className="container detail-page">
       {place.image ? (
         <figure className="detail-photo-figure">
           <img
@@ -57,6 +62,14 @@ function PlaceDetailsPage() {
             src={place.image}
             alt={place.imageAlt || place.name}
           />
+          {imageSourceUrl && (
+            <figcaption className="detail-photo-caption">
+              Источник фотографии: {" "}
+              <a href={imageSourceUrl}>
+                {place.imageSource.name || imageSourceUrl}
+              </a>
+            </figcaption>
+          )}
         </figure>
       ) : (
         <div

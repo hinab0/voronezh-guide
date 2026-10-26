@@ -6,7 +6,7 @@ function Header() {
       <div className="container header-inner">
         <Link className="logo" to="/" aria-label="На главную">
           <strong>Воронеж без барьеров</strong>
-          <span>Город, открытый каждому</span>
+          <span>Город, доступный каждому</span>
         </Link>
 
         <nav className="navigation" aria-label="Основная навигация">

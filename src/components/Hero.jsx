@@ -67,10 +67,26 @@ return ( <section className="hero">
   }}
 >
   <ToggleButton value="all">
+    {activeFilter === "all" && (
+      <span
+        aria-hidden="true"
+        style={{ marginRight: 9, fontSize: "1.1em", lineHeight: 1 }}
+      >
+        ✓
+      </span>
+    )}
     Все места
   </ToggleButton>
   {categories.map((category) => (
     <ToggleButton key={category} value={category}>
+      {activeFilter === category && (
+        <span
+          aria-hidden="true"
+          style={{ marginRight: 9, fontSize: "1.1em", lineHeight: 1 }}
+        >
+          ✓
+        </span>
+      )}
       {category}
     </ToggleButton>
   ))}

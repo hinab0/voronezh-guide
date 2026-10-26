@@ -6,7 +6,7 @@
       --primary: #245780;
       --primary-dark: #183e60;
       --text: #23364a;
-      --muted: #65778a;
+      --muted: #5b6d80;
       --border: #dce5ee;
       --accent: #e8f1f8;
 
@@ -65,6 +65,31 @@
       text-decoration: none;
     }
 
+    .skip-link {
+      position: fixed;
+      top: 8px;
+      left: 8px;
+      z-index: 1200;
+      max-width: calc(100% - 16px);
+      transform: translateY(calc(-100% - 16px));
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--primary-dark);
+      box-shadow: var(--shadow);
+      font-size: 14px;
+      line-height: 1.4;
+      font-weight: 600;
+      overflow-wrap: anywhere;
+      pointer-events: none;
+    }
+
+    .skip-link:focus-visible {
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
     .container {
       width: min(1440px, calc(100% - 40px));
       margin-inline: auto;
@@ -113,9 +138,10 @@
       overflow-wrap: anywhere;
     }
 
-    .logo span {
-      color: var(--muted);
-      font-size: 12px;
+    .header .logo > span {
+      color: var(--primary-dark);
+      font-size: 18px;
+      font-weight: 600;
     }
 
     .navigation {
@@ -195,6 +221,11 @@
     .search input:focus-visible {
       outline: 3px solid #5599d1;
       outline-offset: 2px;
+    }
+
+    .search input::placeholder {
+      color: var(--muted);
+      opacity: 1;
     }
 
     .primary-button {
@@ -326,7 +357,7 @@
       max-width: 100%;
       overflow-wrap: anywhere;
       color: var(--primary);
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -356,8 +387,8 @@
       padding: 6px 11px;
       border-radius: 8px;
       background: #f0f3f6;
-      color: #65778a;
-      font-size: 12px;
+      color: var(--muted);
+      font-size: 13px;
     }
 
     .card-button {
@@ -512,6 +543,23 @@
 
 .detail-photo-figure {
   margin: 0 0 32px;
+}
+
+.detail-photo-caption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.detail-photo-caption a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.detail-photo-caption a:focus-visible {
+  outline: 3px solid #5599d1;
+  outline-offset: 3px;
 }
 
 .detail-overview {
