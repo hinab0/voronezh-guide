@@ -1,5 +1,6 @@
-##English
+# Voronezh Without Barriers
 
+[RUS](README.md) | [ENG](README.en.md)
 # Voronezh Without Barriers
 
 An educational React web project featuring a guide to places in Voronezh, Russia, with a focus on accessibility information for people with disabilities and other access needs.
