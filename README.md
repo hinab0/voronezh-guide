@@ -1,16 +1,72 @@
-# React + Vite
+# Воронеж без барьеров
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Учебный веб-путеводитель по местам Воронежа. Проект показывает описания объектов и имеющиеся сведения об их физической доступности. Неизвестные характеристики не трактуются как подтверждение доступности.
 
-Currently, two official plugins are available:
+## Возможности
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Главная страница с поиском по названию и фильтрацией по категориям.
+- Каталог `/places` с поиском, категориями и фильтрами «Есть пандус» и «Без ступеней».
+- Отдельные страницы мест с описанием, фотографией при наличии, адресом, дополнительной информацией и сведениями о доступности.
+- Навигация между главной страницей, каталогом и страницами мест.
 
-## React Compiler
+Фильтры доступности используют только явно указанные статусы: неизвестные или отсутствующие значения не считаются подтверждением наличия пандуса или отсутствия ступеней.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Технологии
 
-## Expanding the ESLint configuration
+- JavaScript
+- React и React DOM
+- Vite с официальным React-плагином
+- React Router
+- MUI (Material UI) и Emotion
+- ESLint
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Требования
+
+Для установки зависимостей и запуска нужен установленный Node.js и npm. Версия Node.js отдельно в проекте не зафиксирована.
+
+## Запуск и проверка
+
+Установить зависимости:
+
+```sh
+npm install
+```
+
+Запустить сервер разработки:
+
+```sh
+npm run dev
+```
+
+Собрать production-версию:
+
+```sh
+npm run build
+```
+
+Предварительно просмотреть production-сборку:
+
+```sh
+npm run preview
+```
+
+Проверить код ESLint:
+
+```sh
+npm run lint
+```
+
+## Структура проекта
+
+- `src/components/` — компоненты шапки, главной страницы, каталога, карточек, уведомлений и подвала.
+- `src/icons/` — SVG-компоненты пиктограмм мест.
+- `src/place.js` — данные мест, включая фотографии и доступность.
+- `src/PlaceDetailsPage.jsx` — страница отдельного места.
+- `src/App.jsx` — маршруты и общая структура страниц.
+- `src/App.css`, `src/index.css` — стили приложения и глобальные стили.
+- `public/images/` — локальные фотографии мест.
+- `public/favicon.svg` — значок сайта.
+
+## Сведения о доступности
+
+Данные отражают только имеющиеся подтверждённые сведения. Статус «Не проверено» или отсутствие характеристики означает, что подтверждённой информации нет; это не доказывает ни доступность, ни недоступность места. Уточняйте условия посещения по указанным для конкретного места источникам.
